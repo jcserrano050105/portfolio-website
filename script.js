@@ -92,5 +92,47 @@ lightbox.addEventListener('keydown', function (e) {
   if (e.key === 'ArrowRight') showSlide(current + 1);
 });
 
+// CV menu: the button slides down two options, view on the page or download.
+var cvToggle = document.querySelector('[data-cv-toggle]');
+var cvOptions = document.getElementById('cv-options');
+
+function setCvMenu(open) {
+  cvOptions.classList.toggle('open', open);
+  cvToggle.setAttribute('aria-expanded', String(open));
+}
+
+cvToggle.addEventListener('click', function () {
+  setCvMenu(cvToggle.getAttribute('aria-expanded') !== 'true');
+});
+document.addEventListener('click', function (e) {
+  if (!e.target.closest('.cv-menu')) setCvMenu(false);
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') setCvMenu(false);
+});
+cvOptions.querySelector('a').addEventListener('click', function () { setCvMenu(false); });
+
+// CV viewer: the PDF only loads the first time someone opens it.
+// Browsers without a built-in PDF viewer (most phones) get open/download buttons instead.
+var cvViewer = document.getElementById('cv-viewer');
+var cvFrame = cvViewer.querySelector('iframe');
+var cvFallback = cvViewer.querySelector('.cv-fallback');
+var canShowPdf = navigator.pdfViewerEnabled !== false;
+
+document.querySelectorAll('[data-cv-view]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    setCvMenu(false);
+    if (canShowPdf) {
+      if (!cvFrame.src) cvFrame.src = 'resume.pdf#view=FitH';
+      cvFrame.hidden = false;
+    } else {
+      cvFallback.hidden = false;
+    }
+    cvViewer.showModal();
+  });
+});
+cvViewer.querySelector('.cv-close').addEventListener('click', function () { cvViewer.close(); });
+cvViewer.addEventListener('click', function (e) { if (e.target === cvViewer) cvViewer.close(); });
+
 // Keep the footer year current.
 document.getElementById('year').textContent = new Date().getFullYear();

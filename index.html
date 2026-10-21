@@ -44,7 +44,14 @@
           <p class="lede">I'm Josiah Cedric Serrano, a BS Information Technology student at FEU Institute of Technology, specializing in Web and Mobile Application development. I'm looking for an internship where I can apply my skills, learn from experienced developers and contribute real value to the team. I also take on freelance projects, from business websites to mobile apps.</p>
           <div class="cta">
             <a class="btn primary" href="#projects">View my projects →</a>
-            <a class="btn ghost" href="resume.pdf" download>Download CV</a>
+            <!-- CV menu: slides down to offer viewing on the page or downloading -->
+            <div class="cv-menu">
+              <button type="button" class="btn ghost" data-cv-toggle aria-expanded="false" aria-controls="cv-options">My CV <span class="caret" aria-hidden="true">▾</span></button>
+              <div class="cv-options" id="cv-options">
+                <button type="button" data-cv-view><span aria-hidden="true">◱</span> View CV here</button>
+                <a href="resume.pdf" download="Josiah-Cedric-Serrano-CV.pdf"><span aria-hidden="true">↓</span> Download PDF</a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -138,7 +145,7 @@
             </div>
             <div class="meta"><span class="pill">Capstone</span><span class="id">2025 – 2026</span><span class="id">Web &amp; mobile app · Team of 5</span></div>
             <div class="body">
-              <h3>LearnBridge: AI-powered tutoring platform for Grade 2–6 learners</h3>
+              <h3>LearnBridge: Development of a Web and Mobile-Based Academic Support System with AI-Powered Tutor Evaluation and Recommendation for Elementary Learners</h3>
               <p>A web and mobile platform that connects Filipino parents with verified tutors in English and Mathematics. Tutors pass document checks and an AI-generated certification exam (OpenAI); students take a pre-assessment, and a weighted matching algorithm ranks tutors by weak-subject score, budget, gender and location. Parents book 8-session packages, track progress after every session, and pay through a prepaid wallet that splits fees automatically (90% tutor, 10% platform).</p>
               <ul class="tags"><li>React</li><li>Tailwind CSS</li><li>Supabase</li><li>OpenAI API</li><li>React Native</li><li>PayMongo</li></ul>
               <div class="links"><a href="#" target="_blank" rel="noopener">Live demo ↗</a><a href="#" target="_blank" rel="noopener">Source code ↗</a></div>
@@ -214,7 +221,7 @@
         <ol class="log" reversed>
           <li>
             <span class="when">Expected 2027</span>
-            <div><h3>BS Information Technology</h3><p>Specialization in Web and Mobile Application. Capstone: LearnBridge, a web and mobile academic support system with AI tutor skills validation and recommendations.</p></div>
+            <div><h3>BS Information Technology</h3><p>Specialization in Web and Mobile Application. Capstone: LearnBridge, a web and mobile-based academic support system with AI-powered tutor evaluation and recommendation for elementary learners.</p></div>
             <span class="where">FEU Institute of Technology · Sampaloc, Manila</span>
           </li>
           <li>
@@ -242,7 +249,11 @@
         <div class="channels">
           <div class="channel">
             <div><div class="k">Email</div><a class="v" id="email" href="mailto:serranojosiahcedric@gmail.com">serranojosiahcedric@gmail.com</a></div>
-            <button class="copy" type="button" data-copy="email">Copy</button>
+            <div class="channel-actions">
+              <button class="copy" type="button" data-copy="email">Copy</button>
+              <!-- Opens Gmail's compose window with the address and a subject already filled in -->
+              <a class="copy" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=serranojosiahcedric@gmail.com&amp;su=Internship%20%2F%20project%20inquiry" target="_blank" rel="noopener">Send via Gmail ↗</a>
+            </div>
           </div>
           <div class="channel">
             <div><div class="k">LinkedIn</div><a class="v" href="https://ph.linkedin.com/in/josiah-serrano-020595443" target="_blank" rel="noopener">linkedin.com/in/josiah-serrano</a></div>
@@ -251,7 +262,11 @@
             <div><div class="k">GitHub</div><a class="v" href="https://github.com/jcserrano050105" target="_blank" rel="noopener">github.com/jcserrano050105</a></div>
           </div>
           <div class="channel">
-            <div><div class="k">Résumé</div><a class="v" href="resume.pdf" download>Download CV (PDF)</a></div>
+            <div><div class="k">Résumé</div><span class="v">Josiah-Cedric-Serrano-CV.pdf</span></div>
+            <div class="channel-actions">
+              <button class="copy" type="button" data-cv-view>View</button>
+              <a class="copy" href="resume.pdf" download="Josiah-Cedric-Serrano-CV.pdf">Download</a>
+            </div>
           </div>
         </div>
       </div>
@@ -271,6 +286,26 @@
       <figcaption></figcaption>
     </figure>
     <button type="button" class="lb-nav lb-next" aria-label="Next screenshot">›</button>
+  </dialog>
+
+  <!-- CV viewer: shows resume.pdf on the page; the PDF loads only when opened -->
+  <dialog class="cv-viewer" id="cv-viewer" aria-label="CV preview">
+    <div class="cv-bar">
+      <strong>Josiah Cedric Serrano · CV</strong>
+      <div class="cv-bar-actions">
+        <a class="copy" href="resume.pdf" target="_blank" rel="noopener">Open in new tab ↗</a>
+        <a class="copy" href="resume.pdf" download="Josiah-Cedric-Serrano-CV.pdf">Download</a>
+        <button type="button" class="lb-close cv-close" aria-label="Close CV">×</button>
+      </div>
+    </div>
+    <iframe title="Josiah Cedric Serrano CV" hidden></iframe>
+    <div class="cv-fallback" hidden>
+      <p>This browser can't show PDFs inside the page.</p>
+      <div class="cta">
+        <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener">Open CV ↗</a>
+        <a class="btn ghost" href="resume.pdf" download="Josiah-Cedric-Serrano-CV.pdf">Download PDF</a>
+      </div>
+    </div>
   </dialog>
 
   <script src="script.js"></script>

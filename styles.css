@@ -462,6 +462,9 @@ section.photo-section .wrap { padding-block: 88px; }
 }
 .channel:hover { border-color: rgb(34 211 238 / .45); border-left-color: var(--accent); }
 .channel > div { min-width: 0; }
+/* the email row has two buttons; they wrap under the address instead of breaking it */
+.channel { flex-wrap: wrap; }
+.channel > div:first-child { flex: 1 1 270px; }
 .channel .k { font-family: var(--font-mono); font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); }
 .channel .v { display: block; font-weight: 600; overflow-wrap: anywhere; }
 .channel a.v { text-decoration: none; }
@@ -478,6 +481,83 @@ section.photo-section .wrap { padding-block: 88px; }
   cursor: pointer;
 }
 .copy:hover { background: rgb(34 211 238 / .12); }
+a.copy { text-decoration: none; white-space: nowrap; }
+.channel-actions { display: flex; gap: 8px; flex: none; }
+
+/* CV menu: options slide down under the button */
+.cv-menu { position: relative; }
+.cv-menu .caret { display: inline-block; transition: transform .2s ease; }
+.cv-menu [aria-expanded="true"] .caret { transform: rotate(180deg); }
+.cv-options {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 20;
+  min-width: 100%;
+  display: grid;
+  padding: 6px;
+  background: rgb(12 18 25 / .97);
+  border: 1px solid rgb(34 211 238 / .4);
+  box-shadow: var(--glow);
+  /* closed: folded up and invisible */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  clip-path: inset(0 0 100% 0);
+  transition: opacity .2s ease, transform .2s ease, clip-path .25s ease, visibility 0s linear .25s;
+}
+.cv-options.open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+  transition: opacity .2s ease, transform .2s ease, clip-path .25s ease;
+}
+.cv-options button, .cv-options a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  font: 500 .8rem var(--font-mono);
+  color: var(--ink);
+  background: none;
+  border: 0;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.cv-options span { color: var(--accent); width: 1em; }
+.cv-options button:hover, .cv-options a:hover,
+.cv-options button:focus-visible, .cv-options a:focus-visible { background: rgb(34 211 238 / .12); color: var(--accent); outline: none; }
+
+/* CV viewer: pops up and slides in from the top */
+.cv-viewer {
+  width: min(900px, 100vw - 32px);
+  height: calc(100vh - 48px);
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  border: 1px solid rgb(34 211 238 / .4);
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: var(--glow);
+}
+.cv-viewer[open] { display: grid; grid-template-rows: auto 1fr; animation: cv-in .3s ease; }
+.cv-viewer::backdrop { background: rgb(5 8 12 / .88); backdrop-filter: blur(4px); }
+@keyframes cv-in { from { opacity: 0; transform: translateY(-24px); } }
+.cv-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px 10px 18px; border-bottom: 1px solid var(--line); }
+.cv-bar strong { font-family: var(--font-display); font-size: 1rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cv-bar-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+.cv-viewer .cv-close { position: static; width: 40px; height: 40px; }
+.cv-viewer iframe { width: 100%; height: 100%; border: 0; background: #fff; }
+.cv-fallback { display: grid; place-content: center; justify-items: center; gap: 20px; padding: 24px; text-align: center; color: var(--muted); }
+.cv-fallback[hidden], .cv-viewer iframe[hidden] { display: none; }
+@media (max-width: 640px) {
+  .cv-viewer { width: 100vw; height: 100vh; border: 0; }
+  .cv-bar strong { display: none; }
+  .cv-bar a.copy[target] { display: none; }
+}
 
 footer { background: var(--band); color: var(--band-ink); }
 footer .wrap {
