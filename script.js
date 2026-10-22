@@ -112,23 +112,40 @@ document.addEventListener('keydown', function (e) {
 });
 cvOptions.querySelector('a').addEventListener('click', function () { setCvMenu(false); });
 
-// CV viewer: the PDF only loads the first time someone opens it.
-// Browsers without a built-in PDF viewer (most phones) get open/download buttons instead.
+// Document viewer, shared by the CV and the certificates.
+// Pages are shown as images (rendered from the PDFs); Download still gives the PDF.
 var cvViewer = document.getElementById('cv-viewer');
-var cvFrame = cvViewer.querySelector('iframe');
-var cvFallback = cvViewer.querySelector('.cv-fallback');
-var canShowPdf = navigator.pdfViewerEnabled !== false;
+var cvPages = cvViewer.querySelector('.cv-pages');
+var cvTitle = cvViewer.querySelector('.cv-bar strong');
+var cvDownload = cvViewer.querySelector('a[download]');
+
+function openDoc(pages, title, pdf, filename) {
+  cvTitle.textContent = title;
+  cvViewer.setAttribute('aria-label', title);
+  cvDownload.href = pdf;
+  cvDownload.download = filename;
+  cvPages.textContent = '';
+  pages.forEach(function (src, i) {
+    var img = document.createElement('img');
+    img.src = src;
+    img.alt = title + (pages.length > 1 ? ', page ' + (i + 1) : '');
+    cvPages.appendChild(img);
+  });
+  cvPages.scrollTop = 0;
+  cvViewer.showModal();
+}
 
 document.querySelectorAll('[data-cv-view]').forEach(function (btn) {
   btn.addEventListener('click', function () {
     setCvMenu(false);
-    if (canShowPdf) {
-      if (!cvFrame.src) cvFrame.src = 'resume.pdf#view=FitH';
-      cvFrame.hidden = false;
-    } else {
-      cvFallback.hidden = false;
-    }
-    cvViewer.showModal();
+    openDoc(['images/resume/page-1.jpg'], 'Josiah Cedric Serrano · CV', 'resume.pdf', 'Josiah-Cedric-Serrano-CV.pdf');
+  });
+});
+
+document.querySelectorAll('[data-cert]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var name = btn.dataset.cert;
+    openDoc(['images/certificates/' + name + '.jpg'], btn.dataset.certTitle, 'certificates/' + name + '.pdf', 'Josiah-Serrano-' + name + '.pdf');
   });
 });
 cvViewer.querySelector('.cv-close').addEventListener('click', function () { cvViewer.close(); });

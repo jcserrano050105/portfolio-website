@@ -534,9 +534,8 @@ a.copy { text-decoration: none; white-space: nowrap; }
 /* CV viewer: pops up and slides in from the top */
 .cv-viewer {
   width: min(900px, 100vw - 32px);
-  height: calc(100vh - 48px);
   max-width: none;
-  max-height: none;
+  max-height: calc(100vh - 48px);
   padding: 0;
   border: 1px solid rgb(34 211 238 / .4);
   background: var(--bg);
@@ -550,13 +549,13 @@ a.copy { text-decoration: none; white-space: nowrap; }
 .cv-bar strong { font-family: var(--font-display); font-size: 1rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cv-bar-actions { display: flex; align-items: center; gap: 8px; flex: none; }
 .cv-viewer .cv-close { position: static; width: 40px; height: 40px; }
-.cv-viewer iframe { width: 100%; height: 100%; border: 0; background: #fff; }
-.cv-fallback { display: grid; place-content: center; justify-items: center; gap: 20px; padding: 24px; text-align: center; color: var(--muted); }
-.cv-fallback[hidden], .cv-viewer iframe[hidden] { display: none; }
+/* Pages scroll inside the viewer; a landscape certificate fits without scrolling */
+.cv-pages { min-height: 0; overflow-y: auto; display: grid; gap: 12px; padding: 12px; }
+.cv-pages img { display: block; width: 100%; height: auto; background: #fff; }
 @media (max-width: 640px) {
-  .cv-viewer { width: 100vw; height: 100vh; border: 0; }
-  .cv-bar strong { display: none; }
-  .cv-bar a.copy[target] { display: none; }
+  .cv-viewer { width: 100vw; max-height: 100vh; border: 0; }
+  .cv-bar strong { font-size: .85rem; }
+  .cv-pages { padding: 8px; }
 }
 
 footer { background: var(--band); color: var(--band-ink); }

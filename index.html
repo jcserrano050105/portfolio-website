@@ -76,7 +76,7 @@
       <div class="wrap">
         <div class="metric"><b>BSIT</b><span>FEU Tech, expected 2027</span></div>
         <div class="metric"><b>2</b><span>team-built web &amp; mobile systems</span></div>
-        <div class="metric"><b>5</b><span>Cisco &amp; PMI certifications</span></div>
+        <div class="metric"><b>6</b><span>Cisco &amp; PMI certifications</span></div>
         <div class="metric"><b>6</b><span>programming languages</span></div>
       </div>
     </div>
@@ -185,27 +185,44 @@
           <button type="button" class="chip" data-filter="network" aria-pressed="false">Networking</button>
           <button type="button" class="chip" data-filter="dev" aria-pressed="false">DevNet</button>
           <button type="button" class="chip" data-filter="pm" aria-pressed="false">Project management</button>
+          <button type="button" class="chip" data-filter="event" aria-pressed="false">Events</button>
         </div>
+        <!-- Each View button opens its certificate in the shared viewer: data-cert names both
+             images/certificates/<name>.jpg (shown) and certificates/<name>.pdf (download) -->
         <ul class="badges">
-          <li class="badge" data-cat="network">
-            <span class="badge-icon">CCNA</span>
-            <div><h3>CCNA: Enterprise Networking, Security, and Automation</h3><p>Cisco</p></div>
+          <li class="badge" data-cat="event">
+            <span class="badge-icon">TIC</span>
+            <div><h3>TICaP 21 – Certificate of Participation</h3><p>FEU Institute of Technology · Oct 2026</p></div>
+            <button type="button" class="copy" data-cert="ticap-21-participation" data-cert-title="TICaP 21 – Certificate of Participation">View</button>
+          </li>
+          <li class="badge" data-cat="pm">
+            <span class="badge-icon">PMI</span>
+            <div><h3>PMI Project Management Ready®</h3><p>Project Management Institute · Mar 2026</p></div>
+            <button type="button" class="copy" data-cert="pmi-project-management-ready" data-cert-title="PMI Project Management Ready">View</button>
           </li>
           <li class="badge" data-cat="network">
             <span class="badge-icon">CCNA</span>
-            <div><h3>CCNA: Switching, Routing, and Wireless Essentials</h3><p>Cisco</p></div>
+            <div><h3>CCNA: Enterprise Networking, Security, and Automation</h3><p>Cisco Networking Academy · Nov 2025</p></div>
+            <button type="button" class="copy" data-cert="ccna-enterprise-networking" data-cert-title="CCNA: Enterprise Networking, Security, and Automation">View</button>
+          </li>
+          <li class="badge" data-cat="network">
+            <span class="badge-icon">CCNA</span>
+            <div><h3>CCNA: Switching, Routing, and Wireless Essentials</h3><p>Cisco Networking Academy · Apr 2025</p></div>
+            <button type="button" class="copy" data-cert="ccna-switching-routing-wireless" data-cert-title="CCNA: Switching, Routing, and Wireless Essentials">View</button>
           </li>
           <li class="badge" data-cat="network">
             <span class="badge-icon">CCST</span>
-            <div><h3>Cisco Certified Support Technician – Networking</h3><p>Cisco</p></div>
+            <div><h3>Cisco Certified Support Technician – Networking</h3><p>Cisco · Feb 2025</p></div>
+            <button type="button" class="copy" data-cert="ccst-networking" data-cert-title="Cisco Certified Support Technician – Networking">View</button>
+          </li>
+          <li class="badge" data-cat="network">
+            <span class="badge-icon">CCNA</span>
+            <div><h3>CCNA: Introduction to Networks</h3><p>Cisco Networking Academy · Jan 2025</p></div>
+            <button type="button" class="copy" data-cert="ccna-introduction-to-networks" data-cert-title="CCNA: Introduction to Networks">View</button>
           </li>
           <li class="badge" data-cat="dev">
             <span class="badge-icon">DEV</span>
             <div><h3>Cisco DevNet Associate</h3><p>Cisco</p></div>
-          </li>
-          <li class="badge" data-cat="pm">
-            <span class="badge-icon">PMI</span>
-            <div><h3>Project Management Ready</h3><p>Project Management Institute (PMI)</p></div>
           </li>
         </ul>
       </div>
@@ -288,24 +305,17 @@
     <button type="button" class="lb-nav lb-next" aria-label="Next screenshot">›</button>
   </dialog>
 
-  <!-- CV viewer: shows resume.pdf on the page; the PDF loads only when opened -->
+  <!-- Document viewer for the CV and certificates: shows each page as an image, Download gives the PDF.
+       script.js fills in the pages, title and download link when it opens. -->
   <dialog class="cv-viewer" id="cv-viewer" aria-label="CV preview">
     <div class="cv-bar">
       <strong>Josiah Cedric Serrano · CV</strong>
       <div class="cv-bar-actions">
-        <a class="copy" href="resume.pdf" target="_blank" rel="noopener">Open in new tab ↗</a>
-        <a class="copy" href="resume.pdf" download="Josiah-Cedric-Serrano-CV.pdf">Download</a>
-        <button type="button" class="lb-close cv-close" aria-label="Close CV">×</button>
+        <a class="copy" href="resume.pdf" download="Josiah-Cedric-Serrano-CV.pdf">Download PDF</a>
+        <button type="button" class="lb-close cv-close" aria-label="Close viewer">×</button>
       </div>
     </div>
-    <iframe title="Josiah Cedric Serrano CV" hidden></iframe>
-    <div class="cv-fallback" hidden>
-      <p>This browser can't show PDFs inside the page.</p>
-      <div class="cta">
-        <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener">Open CV ↗</a>
-        <a class="btn ghost" href="resume.pdf" download="Josiah-Cedric-Serrano-CV.pdf">Download PDF</a>
-      </div>
-    </div>
+    <div class="cv-pages"></div>
   </dialog>
 
   <script src="script.js"></script>
